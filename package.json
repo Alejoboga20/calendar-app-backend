@@ -1,0 +1,15 @@
+{
+  "name": "calendar-app-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Alejoboga20/calendar-app-backend.git",
+  "author": "Alejo boga <alejoboga20@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
