@@ -1,7 +1,8 @@
 const { response } = require('express');
 
 const createUser = (req, res = response) => {
-  res.json({ ok: true, msg: 'login' });
+  console.log(req.body);
+  res.json({ ok: true, msg: 'new' });
 };
 
 const loginUser = (req, res) => {
