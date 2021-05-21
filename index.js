@@ -1,7 +1,9 @@
 const express = require('express');
+const dotenv = require('dotenv');
 
+dotenv.config();
 const app = express();
 
 app.use(express.static('public'));
 
-app.listen(4000, () => console.log('server up'));
+app.listen(process.env.PORT, () => console.log('server up'));
