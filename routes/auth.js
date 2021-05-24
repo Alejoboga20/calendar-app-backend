@@ -13,7 +13,14 @@ router.post(
   createUser
 );
 
-router.post('/', loginUser);
+router.post(
+  '/',
+  [
+    check('email', 'Email is required').isEmail(),
+    check('password', 'Password should be 6 chars long').isLength({ min: 6 })
+  ],
+  loginUser
+);
 
 router.get('/renew', renewToken);
 
