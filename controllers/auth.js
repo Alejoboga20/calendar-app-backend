@@ -1,12 +1,14 @@
 const { response } = require('express');
+const { validationResult } = require('express-validator');
 
 const createUser = (req, res = response) => {
   const { name, email, password } = req.body;
+  const errors = validationResult(req);
 
-  if (name.length < 5) {
+  if (!errors.isEmpty()) {
     return res.status(400).json({
       ok: false,
-      msg: 'Name should have more than 5 letters'
+      errors: errors.mapped()
     });
   }
 
