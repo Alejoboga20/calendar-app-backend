@@ -3,7 +3,15 @@ const { check } = require('express-validator');
 const { createUser, loginUser, renewToken } = require('../controllers/auth');
 const router = Router();
 
-router.post('/new', [check('name', 'Name is required').not().isEmpty()], createUser);
+router.post(
+  '/new',
+  [
+    check('name', 'Name is required').not().isEmpty(),
+    check('email', 'Email is required').isEmail(),
+    check('password', 'Password should be 6 chars long').isLength({ min: 6 })
+  ],
+  createUser
+);
 
 router.post('/', loginUser);
 

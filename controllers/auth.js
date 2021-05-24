@@ -12,7 +12,7 @@ const createUser = (req, res = response) => {
     });
   }
 
-  res.json({ ok: true, msg: 'new', name, email, password });
+  res.status(201).json({ ok: true, msg: 'new', name, email, password });
 };
 
 const loginUser = (req, res = response) => {
