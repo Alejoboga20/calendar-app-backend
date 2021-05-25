@@ -7,12 +7,10 @@ const createUser = async (req, res = response) => {
 
   try {
     await user.save();
+    res.status(201).json({ ok: true, msg: 'new', name, email, password });
   } catch (error) {
-    console.log(error);
-    throw new Error(error);
+    res.status(500).json({ ok: false, msg: 'User credentials invalid' });
   }
-
-  res.status(201).json({ ok: true, msg: 'new', name, email, password });
 };
 
 const loginUser = (req, res = response) => {
