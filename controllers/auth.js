@@ -12,7 +12,7 @@ const createUser = async (req, res = response) => {
     } else {
       user = new User(req.body);
       await user.save();
-      return res.status(201).json({ ok: true, msg: 'new', name, email, password });
+      return res.status(201).json({ ok: true, uid: user.id, name: user.name });
     }
   } catch (error) {
     res.status(500).json({ ok: false, msg: 'User credentials invalid' });
