@@ -1,5 +1,7 @@
 # calendar-app-backend
 
+To run this app add .env file with required env variables
+
 [MongoDB URL](https://cloud.mongodb.com/v2/60ad3801a734b574e1c0fc7f#clusters?fastPoll=true)
 DB_Admin: Alejo
 DB_PassAdmin: 1234
