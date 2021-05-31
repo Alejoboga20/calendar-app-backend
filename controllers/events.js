@@ -69,6 +69,12 @@ const deleteEvent = async (req, res = response) => {
   const eventId = req.params.id;
 
   try {
+    if (event.user.toString() !== uid) {
+      return res
+        .status(401)
+        .json({ ok: false, msg: 'Not authorized to delete this event' });
+    }
+
     const event = await Event.findByIdAndDelete(eventId);
 
     if (!event) {
