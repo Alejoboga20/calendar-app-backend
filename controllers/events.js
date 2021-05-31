@@ -1,4 +1,5 @@
 const { response } = require('express');
+const { findByIdAndDelete } = require('../models/Event');
 const Event = require('../models/Event');
 
 const getEvents = async (req, res = response) => {
@@ -51,7 +52,7 @@ const updateEvent = async (req, res = response) => {
       new: true
     });
 
-    res.json({
+    return res.json({
       ok: true,
       event: updatedEvent
     });
@@ -65,10 +66,23 @@ const updateEvent = async (req, res = response) => {
 };
 
 const deleteEvent = async (req, res = response) => {
-  res.json({
-    ok: true,
-    msg: 'deleteEvent'
-  });
+  const eventId = req.params.id;
+
+  try {
+    const event = await Event.findByIdAndDelete(eventId);
+
+    if (!event) {
+      return res.status(404).json({ ok: false, msg: 'Event not found' });
+    }
+
+    return res.status(200).json({ ok: true, event: event });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      ok: false,
+      msg: 'An error has ocured'
+    });
+  }
 };
 
 module.exports = { getEvents, createEvent, updateEvent, deleteEvent };
