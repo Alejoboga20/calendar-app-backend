@@ -9,7 +9,17 @@ const getEvents = async (req, res = response) => {
 };
 
 const createEvent = async (req, res = response) => {
-  console.log(req.body);
+  const event = new Event(req.body);
+
+  try {
+    event.user = req.uid;
+    const savedEvent = await event.save();
+
+    res.status(201).json({ ok: true, event: savedEvent });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ ok: false, msg: 'An error has ocured' });
+  }
 
   res.json({
     ok: true,
