@@ -15,4 +15,6 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/event', require('./routes/events'));
 
-app.listen(process.env.PORT, () => console.log('server up'));
+app.listen(process.env.PORT, () =>
+  console.log('server up in: ', process.env.PORT)
+);
