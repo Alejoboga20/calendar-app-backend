@@ -62,6 +62,8 @@ const updateEvent = async (req, res = response) => {
 
 const deleteEvent = async (req, res = response) => {
   const eventId = req.params.id;
+  const uid = req.uid;
+  const event = await Event.findById(eventId);
 
   try {
     if (event.user.toString() !== uid) {
@@ -70,13 +72,13 @@ const deleteEvent = async (req, res = response) => {
         .json({ ok: false, msg: 'Not authorized to delete this event' });
     }
 
-    const event = await Event.findByIdAndDelete(eventId);
+    const eventDeleted = await Event.findByIdAndDelete(eventId);
 
     if (!event) {
       return res.status(404).json({ ok: false, msg: 'Event not found' });
     }
 
-    return res.status(200).json({ ok: true, event: event });
+    return res.status(200).json({ ok: true, event: eventDeleted });
   } catch (e) {
     console.log(e);
     res.status(500).json({
