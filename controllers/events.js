@@ -23,11 +23,6 @@ const createEvent = async (req, res = response) => {
     console.log(e);
     res.status(500).json({ ok: false, msg: 'An error has ocured' });
   }
-
-  res.json({
-    ok: true,
-    msg: 'createEvent'
-  });
 };
 
 const updateEvent = async (req, res = response) => {
